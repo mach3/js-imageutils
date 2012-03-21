@@ -17,6 +17,9 @@
 		regex : {
 			extension : /\.(png|jpg|jpeg|gif)$/i
 		},
+		/**
+		 * initialize ImageUtils
+		 */
 		init : function(){
 			var m = navigator.userAgent.match(/MSIE\s([\d\.]+?);/i);
 			this.browser.msie = m !== null;
@@ -60,6 +63,18 @@
 				return postfix + a;
 			});
 		},
+		/**
+		 * Set AlphaImageLoader to element
+		 * @param jQueryObject $eles
+		 * @param Object config
+		 * @return jQueryObject
+		 * 
+		 * @example
+		 *   ImageUtils.alphaImage($(ele), {
+		 *     method : "image", // "image" || "crop" || "scale", sizingMethod for AlphaImageLoader
+		 *     blankImage : "./blank.gif", // The path to the transparent GIF image
+		 *   });
+		 */
 		alphaImage : function($eles, config){
 			var my = {};
 			if(! this.browser.msie){ return ; }
@@ -98,7 +113,6 @@
 						path : path
 					})
 				});
-
 			};
 			$eles.each(function(){
 				var o = $(this);
@@ -109,7 +123,20 @@
 					$(this).on("load", my.setFilter);
 				}
 			});
+			return $eles;
 		},
+		/**
+		 * Swap image on hover
+		 * @param jQueryObject $eles
+		 * @param Object config
+		 * @return jQueryObject
+		 * 
+		 * @example
+		 *   ImageUtils.swapImage($(ele), {
+		 *     hoverPostfix : "-hover", // Postfix for hover image
+		 *     ignoreClass : "active", // if the element has this class, swap is ignored.
+		 *   });
+		 */
 		swapImage : function($eles, config){
 			var my = {};
 			my.self = this;
@@ -144,7 +171,22 @@
 					o.hover(my.swap, my.swap);
 				}).attr("src", o.data("hover-image"));
 			});
+			return $eles;
 		},
+		/**
+		 * Add blend effect to element on hover
+		 * @param jQueryObject $eles
+		 * @param Object config
+		 * @return jQueryObject
+		 * 
+		 * @example
+		 *   ImageUtils.blendImage($(ele), {
+		 *     hoverPostfix : "-hover",
+		 *     ignoreClass : "active",
+		 *     durationEnter : 100,
+		 *     durationLeave : 500
+		 *   });
+		 */
 		blendImage : function($eles, config){
 			var my = {};
 			my.self = this;
@@ -196,18 +238,34 @@
 					$(this).on("load", my.init);
 				}
 			});
+			return $eles;
 		}
 	}).init();
 
 	$.fn.extend({
+		/**
+		 * Set AlphaImageLoader to elements
+		 * This call ImageUtils.alphaImage()
+		 * @param Object config
+		 */
 		alphaImage : function(config){
 			ImageUtils.alphaImage(this, config);
 			return this;
 		},
+		/**
+		 * Swap image on hover
+		 * This call ImageUtils.swapImage()
+		 * @param Object config
+		 */
 		swapImage : function(config){
 			ImageUtils.swapImage(this, config);
 			return this;
 		},
+		/**
+		 * Add blend effect to element on hover
+		 * This call ImageUtils.blendImage()
+		 * @param Object config
+		 */
 		blendImage : function(config){
 			ImageUtils.blendImage(this, config);
 			return this;

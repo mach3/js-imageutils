@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Example for ImageUtils</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/imageutils.js"></script>
+	<style type="text/css">
+	body {
+		background-color:#654;
+		font-size:62.5%;
+		width:800px;
+		margin:0 auto;
+	}
+	h1 {
+		font-size:3em;
+		color:#000;
+		text-shadow:0px 0px 2px #fff;
+	}
+	.items {
+		width:800px;
+		padding:20px;
+		background-color:#fff;
+		border-radius:5px;
+		box-shadow:0px 0px 5px #000;
+	}
+	.item {
+		background-color:#eee;
+		padding:20px;
+		border-radius:10px;
+		margin:20px 0;
+	}
+	h2 {
+		font-size:2em;
+		color:#654;
+	}
+	h3 {
+		font-size:1.5em;
+		color:#543;
+		margin-left:15px;
+	}
+	p {
+		font-size:1.3em;
+		color:#765;
+		margin-left:15px;
+	}
+	ul {
+		margin-left:15px;
+	}
+	.button {
+		display:block;
+		background:url(./button.png) 0 0 no-repeat;
+		width:64px;
+		height:64px;
+	}
+	.cols {
+		padding:0;
+		overflow:hidden;
+	}
+	.cols li {
+		list-style-type:none;
+		float:left;
+		margin-right:10px;
+	}
+	</style>
+</head>
+<body>
+
+	<h1>Example for ImageUtils</h1>
+
+	<div class="items">
+		<div class="item" id="demo-01">
+			<h2>alphaImage();</h2>
+			<h3>IMG element</h3>
+			<p><img src="./button.png" alt=""></p>
+			<h3>Background</h3>
+			<p><span class="button" /></p>
+		</div>
+		<script type="text/javascript">
+			$("#demo-01 img, #demo-01 .button").alphaImage();
+		</script>
+		<div class="item" id="demo-02">
+			<h2>swapImage();</h2>
+			<h3>IMG element</h3>
+			<ul class="cols">
+				<li><img src="./button.png" class="active" /></li>
+				<li><img src="./button.png" /></li>
+				<li><img src="./button.png" /></li>
+			</ul>
+			<p class="note">First element has class "active".</p>
+			<h3>Background</h3>
+			<ul class="cols">
+				<li><span class="button active"></span></li>
+				<li><span class="button"></span></li>
+				<li><span class="button"></span></li>
+			</ul>
+			<p class="note">First element has class "active".</p>
+		</div>
+		<script type="text/javascript">
+			$("#demo-02 img, #demo-02 .button").alphaImage().swapImage();
+		</script>
+		<div class="item" id="demo-03">
+			<h2>blendImage();</h2>
+			<h3>IMG element</h3>
+			<ul class="cols">
+				<li><img src="./button.png" class="active"></li>
+				<li><img src="./button.png"></li>
+				<li><img src="./button.png"></li>
+			</ul>
+			<p class="note">First element has class "active".</p>
+			<h3>Background</h3>
+			<ul class="cols">
+				<li><span class="button active"></span></li>
+				<li><span class="button"></span></li>
+				<li><span class="button"></span></li>
+			</ul>
+			<p class="note">First element has class "active".</p>
+		</div>
+		<script type="text/javascript">
+			$("#demo-03 img, #demo-03 .button").alphaImage().blendImage();
+		</script>
+	</div>
+	
+</body>
+</html>

@@ -219,12 +219,15 @@
 				} else {
 					o.append(hover);
 				}
+				hover.data("origin", o);
 				hover.data("blend-image", my);
 				hover.hover(my.blend, my.blend);
 			};
 			my.blend = function(e){
-				var my, enter, opacity, duration;
-				my = $(this).data("blend-image");
+				var o, my, enter, opacity, duration;
+				o = $(this);
+				my = o.data("blend-image");
+				if(o.data("origin").hasClass(my.opt.ignoreClass)){ return; }
 				enter = e.type === "mouseenter";
 				opacity = enter ? 1 : 0;
 				duration = my.opt["duration" + (enter ? "Enter" : "Leave")];

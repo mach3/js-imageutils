@@ -12,7 +12,8 @@
 		type : "ImageUtils",
 		browser : {
 			msie : false,
-			version : null
+			version : 0,
+			ail : false
 		},
 		regex : {
 			extension : /\.(png|jpg|jpeg|gif)$/i
@@ -25,6 +26,9 @@
 			this.browser.msie = m !== null;
 			if( this.browser.msie ){
 				this.browser.version = parseInt(m[1], 10);
+				if(this.browser.version < 9){
+					this.browser.ail = true;
+				}
 			}
 			return this;
 		},
@@ -77,7 +81,7 @@
 		 */
 		alphaImage : function($eles, config){
 			var my = {};
-			if(! this.browser.msie){ return ; }
+			if(! this.browser.ail){ return; }
 			my.self = this;
 			my.opt = $.extend({
 				method : "image",
@@ -209,7 +213,7 @@
 						"height" : o.height(),
 						"background-image" : "url(" + src + ")"
 					});
-				if(my.self.browser.msie){
+				if(my.self.browser.ail){
 					my.self.alphaImage(hover);
 					hover.css("background-image", "none");
 				}

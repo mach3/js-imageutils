@@ -82,43 +82,69 @@
 		</script>
 		<div class="item" id="demo-02">
 			<h2>swapImage();</h2>
+			<p class="note">First element has class "active", then will not be swapped.</p>
 			<h3>IMG element</h3>
 			<ul class="cols">
 				<li><img src="./button.png" class="active" /></li>
 				<li><img src="./button.png" /></li>
 				<li><img src="./button.png" /></li>
 			</ul>
-			<p class="note">First element has class "active".</p>
 			<h3>Background</h3>
 			<ul class="cols">
 				<li><span class="button active"></span></li>
 				<li><span class="button"></span></li>
 				<li><span class="button"></span></li>
 			</ul>
-			<p class="note">First element has class "active".</p>
 		</div>
 		<script type="text/javascript">
 			$("#demo-02 img, #demo-02 .button").alphaImage().swapImage();
 		</script>
 		<div class="item" id="demo-03">
 			<h2>blendImage();</h2>
+			<p class="note">First element has class "active", then will not be blended.</p>
 			<h3>IMG element</h3>
 			<ul class="cols">
 				<li><img src="./button.png" class="active"></li>
 				<li><img src="./button.png"></li>
 				<li><img src="./button.png"></li>
 			</ul>
-			<p class="note">First element has class "active".</p>
 			<h3>Background</h3>
 			<ul class="cols">
 				<li><span class="button active"></span></li>
 				<li><span class="button"></span></li>
 				<li><span class="button"></span></li>
 			</ul>
-			<p class="note">First element has class "active".</p>
 		</div>
 		<script type="text/javascript">
 			$("#demo-03 img, #demo-03 .button").alphaImage().blendImage();
+		</script>
+		<div class="item" id="demo-04">
+			<h2>activateImage();</h2>
+			<p class="note">First element will not be swapped, 
+				because it has been dynamically activated, and has "active" class.</p>
+			<h3>IMG element</h3>
+			<ul class="cols">
+				<li><img src="./button.png" alt="" class="to-activate"></li>
+				<li><img src="./button.png" alt=""></li>
+				<li><img src="./button.png" alt=""></li>
+			</ul>
+			<h3>Background</h3>
+			<ul class="cols">
+				<li><span class="button to-activate"></span></li>
+				<li><span class="button"></span></li>
+				<li><span class="button"></span></li>
+			</ul>
+			<h3>Element with AlphaImageLoader</h3>
+			<ul class="cols">
+				<li><span class="button alpha to-activate"></span></li>
+				<li><span class="button alpha"></span></li>
+				<li><span class="button alpha"></span></li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			$("#demo-04 .alpha").alphaImage();
+			$("#demo-04 img, #demo-04 .button").swapImage();
+			$("#demo-04 .to-activate").activateImage();
 		</script>
 	</div>
 	

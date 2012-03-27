@@ -62,10 +62,23 @@
 			}
 			return r;
 		},
-		_getHoverImage : function(ele, postfix){
+		_getStateImage : function(ele, postfix){
 			return this._getImage(ele).replace(this.regex.extension, function(a){
 				return postfix + a;
 			});
+		},
+		_setStateImage : function(ele, postfix){
+			var o, src;
+			o = $(ele);
+			src = this._getStateImage(ele, postfix);
+			switch(this._getType(ele)){
+				case "img" : o.prop("src", src); break;
+				case "block" : o.css("background-image", "url(" + src + ")"); break;
+				case "ail" :
+					o.css("filter", o.css("filter").replace(this._getImage(ele), src));
+					break;
+			}
+			return this;
 		},
 		/**
 		 * Set AlphaImageLoader to element
@@ -166,7 +179,7 @@
 			$eles.each(function(){
 				var o = $(this);
 				o.data("default-image", my.self._getImage(this));
-				o.data("hover-image", my.self._getHoverImage(this, my.opt.hoverPostfix));
+				o.data("hover-image", my.self._getStateImage(this, my.opt.hoverPostfix));
 				$("<img>").on("load", function(){
 					o.hover(my.swap, my.swap);
 				}).attr("src", o.data("hover-image"));
@@ -199,7 +212,7 @@
 			my.init = function(){
 				var o, src, hover;
 				o = $(this);
-				src = my.self._getHoverImage(this, my.opt.hoverPostfix);
+				src = my.self._getStateImage(this, my.opt.hoverPostfix);
 				hover = $("<span>")
 					.css({
 						"position" : "absolute",
@@ -238,6 +251,25 @@
 				}
 			});
 			return $eles;
+		},
+		/**
+		 * 
+		 */
+		activateImage : function($ele, config){
+			var my = {};
+			my.self = this;
+			my.opt = $.extend({
+				postfix : "-active",
+				className : "active"
+			}, config);
+			my.activate = function(){
+				var o, src;
+				o = $(this);
+				o.addClass(my.opt.className);
+				my.self._setStateImage(this, my.opt.postfix);
+			};
+			$ele.each(my.activate);
+
 		}
 	}).init();
 
@@ -267,6 +299,13 @@
 		 */
 		blendImage : function(config){
 			ImageUtils.blendImage(this, config);
+			return this;
+		},
+		/**
+		 * 
+		 */
+		activateImage : function(config){
+			ImageUtils.activateImage(this, config);
 			return this;
 		}
 	});

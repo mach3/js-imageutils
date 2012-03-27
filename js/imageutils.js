@@ -89,9 +89,8 @@
 			}, config);
 			my.ail = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod={{method}}, src={{path}});";
 			my.setFilter = function(){
-				var o, my, path;
+				var o, path;
 				o = $(this);
-				my = o.data("alpha-image");
 				if(this.tagName.toLowerCase() === "img"){
 					path = o.prop("src");
 					o.css({
@@ -120,7 +119,6 @@
 			};
 			$eles.each(function(){
 				var o = $(this);
-				o.data("alpha-image", my);
 				if(my.self._hasSize(this)){
 					my.setFilter.call(this);
 				} else {
@@ -149,9 +147,8 @@
 				ignoreClass : "active"
 			}, config);
 			my.swap = function(e){
-				var o, my, enter, src, utils;
+				var o, enter, src, utils;
 				o = $(this);
-				my = o.data("swap-image");
 				if(o.hasClass(my.opt.ignoreClass)){ return; }
 				enter = e.type.toLowerCase() === "mouseenter";
 				src = enter ? o.data("hover-image") : o.data("default-image");
@@ -170,7 +167,6 @@
 				var o = $(this);
 				o.data("default-image", my.self._getImage(this));
 				o.data("hover-image", my.self._getHoverImage(this, my.opt.hoverPostfix));
-				o.data("swap-image", my);
 				$("<img>").on("load", function(){
 					o.hover(my.swap, my.swap);
 				}).attr("src", o.data("hover-image"));
@@ -201,9 +197,8 @@
 				durationLeave : 500
 			}, config);
 			my.init = function(){
-				var o, my, src, hover;
+				var o, src, hover;
 				o = $(this);
-				my = o.data("blend-image");
 				src = my.self._getHoverImage(this, my.opt.hoverPostfix);
 				hover = $("<span>")
 					.css({
@@ -224,13 +219,11 @@
 					o.append(hover);
 				}
 				hover.data("origin", o);
-				hover.data("blend-image", my);
 				hover.hover(my.blend, my.blend);
 			};
 			my.blend = function(e){
-				var o, my, enter, opacity, duration;
+				var o, enter, opacity, duration;
 				o = $(this);
-				my = o.data("blend-image");
 				if(o.data("origin").hasClass(my.opt.ignoreClass)){ return; }
 				enter = e.type === "mouseenter";
 				opacity = enter ? 1 : 0;
@@ -238,7 +231,6 @@
 				$(this).stop().fadeTo(duration, opacity);
 			};
 			$eles.each(function(){
-				$(this).data("blend-image", my);
 				if(my.self._hasSize(this)){
 					my.init.call(this);
 				} else {

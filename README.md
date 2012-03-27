@@ -9,6 +9,7 @@ Some effect on hover and transparent PNG images.
 - Enable IE brothers to show transparent PNG, using AlphaImageLoader
 - Swap image on hover
 - Blend images on hover
+- Activate image
 
 ## USAGE
 
@@ -63,17 +64,31 @@ This add elements blend effect on rollover.
 
 - *hoverPostfix* (String) : Same as swapImage()
 - *ignoreClass* (String) : Same as swapImage()
-- *durationEnter* (Integer) : Duration for blend effect when enter
-    Default : 100
-- *durationLeave* (Integer) : Duration for blend effect when leave
-    Default : 500
+- *durationEnter* (Integer) : Duration for blend effect when enter  
+  Default : 100
+- *durationLeave* (Integer) : Duration for blend effect when leave  
+  Default : 500
 
+### activateImage()
+
+This add elements class name for active,  
+add postfix to the image file name.
+
+    $(".my-class").activateImage();
+
+If $(".my-class") has the image named "hoge.jpg",  
+it will be swapped to the "hoge-active.jpg",  
+and will be added the class name "active".
+
+### Options
+
+- *postfix* (String) : Postfix for the active image  
+  Default : "-active"
+
+- *className* (String) : Class name for the active element  
+  Default : "active"
 
 ## Versions
 
+- 0.9.1 : Add activeImage(), fix stuffs.
 - 0.9 : First release
-
-
-## Todo
-
-- Add example

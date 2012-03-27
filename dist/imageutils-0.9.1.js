@@ -1,7 +1,7 @@
 /*!
  * ImageUtils
  * 
- * @version 0.9
+ * @version 0.9.1
  * @license MIT License
  * @author mach3
  * @require jQuery 1.7+
